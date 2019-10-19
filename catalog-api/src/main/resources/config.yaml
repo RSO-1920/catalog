@@ -9,7 +9,7 @@ kumuluzee:
       port: 8088
   datasources:
     - jndi-name: jdbc/CatalogDS
-      connection-url: jdbc:postgresql://127.0.0.1:5435/catalog
+      connection-url: jdbc:postgresql://192.168.1.7:5435/catalog
       username: postgres
       password: postgres
       max-pool-size: 20

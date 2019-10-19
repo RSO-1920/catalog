@@ -35,3 +35,13 @@ REQUEST BODY:
 }
 
 ```
+
+## Docker
+
+```$xslt
+docker build -t rso1920/catalog:1.0.0-SNAPSHOT-19102019 .
+```
+
+```$xslt
+docker run -d --name rso1920-catalog-api -p 8088:8088 rso1920/catalog:1.0.0-SNAPSHOT-19102019
+```
