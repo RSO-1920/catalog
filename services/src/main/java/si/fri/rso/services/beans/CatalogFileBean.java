@@ -6,6 +6,8 @@ import si.fri.rso.models.converters.FileConverter;
 import si.fri.rso.models.converters.NewFileConverter;
 import si.fri.rso.models.entities.FileEntity;
 import si.fri.rso.models.entities.FileOnChannelEntity;
+import si.fri.rso.models.entities.FileOwnerEntity;
+import si.fri.rso.models.entities.MainEntity;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,17 +33,23 @@ public class CatalogFileBean {
          * When file metadata is created write it into connected tables file owner and file channel.
          * */
         FileOnChannelEntity fileOnChannelEntity = NewFileConverter.toFileOnChannelEntity(newFile, fileEntity);
-        fileOnChannelEntity = (FileOnChannelEntity)this.createNewEntity(fileOnChannelEntity);
+        fileOnChannelEntity = (FileOnChannelEntity) this.createNewEntity(fileOnChannelEntity);
 
         if (fileOnChannelEntity == null || fileOnChannelEntity.getId() == null) {
             return null;
         }
 
+        FileOwnerEntity fileOwnerEntity = NewFileConverter.toFileOwnerEntity(newFile, fileEntity);
+        fileOwnerEntity = (FileOwnerEntity) this.createNewEntity(fileOwnerEntity);
+
+        if (fileOwnerEntity == null || fileOwnerEntity.getId() == null) {
+            return null;
+        }
 
         return FileConverter.toDTO(fileEntity);
     }
 
-    private Object createNewEntity(Object entity) {
+    private MainEntity createNewEntity(MainEntity entity) {
         try {
             beginTx();
             em.persist(entity);
@@ -54,8 +62,6 @@ public class CatalogFileBean {
 
         return  entity;
     }
-
-
 
     private void beginTx() {
         if (!em.getTransaction().isActive())

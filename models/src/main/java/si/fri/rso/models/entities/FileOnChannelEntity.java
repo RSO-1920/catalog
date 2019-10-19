@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file_on_channel")
-public class FileOnChannelEntity {
+public class FileOnChannelEntity implements MainEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file_owner")
-public class FileOwnerEntity {
+public class FileOwnerEntity implements MainEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,10 @@ public class FileOwnerEntity {
     @Column(name = "user_id")
     private Integer userId;
 
+    public Integer getId() {
+        return this.id;
+    }
+
     public FileEntity getFileEntity() {
         return this.fileEntity;
     }
@@ -27,7 +31,7 @@ public class FileOwnerEntity {
     public Integer getUserId() {
         return this.userId;
     }
-    public void setChannelId(Integer userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

@@ -11,7 +11,7 @@ import javax.persistence.*;
                 resultClass = FileEntity.class)
 })
 
-public class FileEntity {
+public class FileEntity implements MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
@@ -28,9 +28,6 @@ public class FileEntity {
 
     public Integer getFileId() {
         return this.fileId;
-    }
-    public void setFileId(Integer fileId) {
-        this.fileId = fileId;
     }
 
     public String getFileName() {
