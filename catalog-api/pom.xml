@@ -31,13 +31,13 @@
     <dependencies>
         <dependency>
             <groupId>si.fri.rso</groupId>
-            <artifactId>lib</artifactId>
+            <artifactId>catalog-lib</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>si.fri.rso</groupId>
-            <artifactId>services</artifactId>
+            <artifactId>catalog-services</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
