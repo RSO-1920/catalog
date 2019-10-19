@@ -2,7 +2,7 @@ package si.fri.rso.api.v1.controllers;
 
 import si.fri.rso.api.v1.MainController;
 import si.fri.rso.lib.FileDTO;
-import si.fri.rso.services.beans.FileOnChannelBean;
+import si.fri.rso.services.beans.CatalogFileOnChannelBean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ import java.util.List;
 public class CatalogFileChannelController extends MainController {
 
     @Inject
-    FileOnChannelBean fileOnChannelBean;
+    CatalogFileOnChannelBean catalogFileOnChannelBean;
 
     @GET
     @Path("{channelId}")
@@ -28,7 +28,7 @@ public class CatalogFileChannelController extends MainController {
             return Response.status(400).entity(this.responseBadRequest("param channelId is missing")).build();
         }
 
-        List<FileDTO> channelFiles = fileOnChannelBean.getChannelFiles(channelId);
+        List<FileDTO> channelFiles = catalogFileOnChannelBean.getChannelFiles(channelId);
 
         return Response.status(200).entity(this.responseOk("", channelFiles)).build();
     }

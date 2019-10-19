@@ -13,4 +13,8 @@ public class MainController {
         return new ResponseDTO(400, message, new Object());
     }
 
+    public ResponseDTO responseServerError(String message) {
+        return new ResponseDTO(500, message, new Object());
+    }
+
 }

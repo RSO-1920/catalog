@@ -17,6 +17,10 @@ public class FileOnChannelEntity {
     @Column(name = "channel_id")
     private Integer channelId;
 
+    public Integer getId() {
+        return this.id;
+    }
+
     public FileEntity getFileEntity() {
         return this.fileEntity;
     }

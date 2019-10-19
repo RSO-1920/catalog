@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class FileOnChannelBean {
+public class CatalogFileOnChannelBean {
     @Inject
     private EntityManager em;
 
@@ -21,6 +21,6 @@ public class FileOnChannelBean {
         Query q = em.createNamedQuery("selectFilesOnChannel").setParameter(1, channelId);
         List<FileEntity> channelFiles =  q.getResultList();
 
-        return (List<FileDTO>) channelFiles.stream().map(FileConverter::toEntity).collect(Collectors.toList());
+        return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
     }
 }

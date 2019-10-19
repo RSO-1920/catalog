@@ -5,7 +5,7 @@ import si.fri.rso.models.entities.FileEntity;
 
 public class FileConverter {
 
-    public static FileDTO toEntity(FileEntity fileEntity) {
+    public static FileDTO toDTO(FileEntity fileEntity) {
 
         FileDTO file = new FileDTO();
         file.setFileId(fileEntity.getFileId());

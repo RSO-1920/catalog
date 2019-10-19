@@ -2,8 +2,9 @@ package si.fri.rso.api.v1.controllers;
 
 import com.google.gson.Gson;
 import si.fri.rso.api.v1.MainController;
+import si.fri.rso.lib.FileDTO;
 import si.fri.rso.lib.NewFileMetadataDTO;
-import si.fri.rso.services.beans.FileBean;
+import si.fri.rso.services.beans.CatalogFileBean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ import javax.ws.rs.core.Response;
 public class CatalogFileController extends MainController {
 
     @Inject
-    FileBean fileBean;
+    CatalogFileBean catalogFileBean;
 
     @POST
     public Response uploadFileMetadata(String body) {
@@ -26,11 +27,18 @@ public class CatalogFileController extends MainController {
         System.out.println("BODY: " + body);
 
         Gson gson = new Gson();
-
         NewFileMetadataDTO newFileMetadata = gson.fromJson(body, NewFileMetadataDTO.class);
 
-        fileBean.createFileMetadata(newFileMetadata);
+        if (newFileMetadata.getChannelId() == null || newFileMetadata.getFileName() == null ||
+                newFileMetadata.getFilePath() == null || newFileMetadata.getFileType() == null ||newFileMetadata.getUserId() == null) {
+            return Response.status(400).entity(this.responseBadRequest("channelId, fileName, filePath, fileType or userId is missing")).build();
+        }
 
-        return Response.status(200).entity(newFileMetadata).build();
+        FileDTO newFile = catalogFileBean.createFileMetadata(newFileMetadata);
+        if (newFile == null) {
+            return Response.status(500).entity(this.responseServerError("error when writing file metadata to DB")).build();
+        }
+
+        return Response.status(200).entity(this.responseOk("", newFile)).build();
     }
 }

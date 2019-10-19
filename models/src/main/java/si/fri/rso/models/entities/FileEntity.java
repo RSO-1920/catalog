@@ -43,7 +43,7 @@ public class FileEntity {
     public String getFilePath() {
         return this.filePath;
     }
-    public void setFilePath(String fileName) {
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
