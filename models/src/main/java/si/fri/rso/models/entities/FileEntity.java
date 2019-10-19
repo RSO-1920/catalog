@@ -10,8 +10,14 @@ public class FileEntity {
     @Column(name = "file_id")
     private Integer fileId;
 
-    @Column(name = "file_name") // imena stolpcev v bazi
+    @Column(name = "file_name")
     private String fileName;
+
+    @Column(name = "file_path")
+    private String filePath;
+
+    @Column(name =  "file_type")
+    private String fileType;
 
     public Integer getFileId() {
         return this.fileId;
@@ -25,6 +31,20 @@ public class FileEntity {
     }
     public void setFileName(String fileName){
         this.fileName = fileName;
+    }
+
+    public String getFilePath() {
+        return this.filePath;
+    }
+    public void setFilePath(String fileName) {
+        this.filePath = filePath;
+    }
+
+    public String getFileType() {
+        return this.fileType;
+    }
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
 }
