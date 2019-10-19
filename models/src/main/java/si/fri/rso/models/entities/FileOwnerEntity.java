@@ -1,5 +1,7 @@
 package si.fri.rso.models.entities;
 
+import si.fri.rso.models.interfaces.MainEntity;
+
 import javax.persistence.*;
 
 @Entity

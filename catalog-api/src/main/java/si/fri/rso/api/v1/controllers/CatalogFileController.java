@@ -23,20 +23,17 @@ public class CatalogFileController extends MainController {
 
     @POST
     public Response uploadFileMetadata(String body) {
-
-        System.out.println("BODY: " + body);
-
         Gson gson = new Gson();
         NewFileMetadataDTO newFileMetadata = gson.fromJson(body, NewFileMetadataDTO.class);
 
         if (newFileMetadata.getChannelId() == null || newFileMetadata.getFileName() == null ||
                 newFileMetadata.getFilePath() == null || newFileMetadata.getFileType() == null ||newFileMetadata.getUserId() == null) {
-            return Response.status(400).entity(this.responseBadRequest("channelId, fileName, filePath, fileType or userId is missing")).build();
+            return Response.status(400).entity(this.responseError(400, "channelId, fileName, filePath, fileType or userId is missing")).build();
         }
 
         FileDTO newFile = catalogFileBean.createFileMetadata(newFileMetadata);
         if (newFile == null) {
-            return Response.status(500).entity(this.responseServerError("error when writing file metadata to DB")).build();
+            return Response.status(500).entity(this.responseError(500, "error when writing file metadata to DB")).build();
         }
 
         return Response.status(200).entity(this.responseOk("", newFile)).build();

@@ -25,7 +25,7 @@ public class CatalogFileChannelController extends MainController {
     public Response getChannelFilesMetadata(@PathParam("channelId") Integer channelId){
 
         if (channelId == null) {
-            return Response.status(400).entity(this.responseBadRequest("param channelId is missing")).build();
+            return Response.status(400).entity(this.responseError(400, "param channelId is missing")).build();
         }
 
         List<FileDTO> channelFiles = catalogFileOnChannelBean.getChannelFiles(channelId);

@@ -7,7 +7,7 @@ import si.fri.rso.models.converters.NewFileConverter;
 import si.fri.rso.models.entities.FileEntity;
 import si.fri.rso.models.entities.FileOnChannelEntity;
 import si.fri.rso.models.entities.FileOwnerEntity;
-import si.fri.rso.models.entities.MainEntity;
+import si.fri.rso.models.interfaces.MainEntity;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

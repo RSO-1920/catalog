@@ -9,12 +9,7 @@ public class MainController {
         return new ResponseDTO(200, message, data);
     }
 
-    public ResponseDTO responseBadRequest(String message) {
-        return new ResponseDTO(400, message, new Object());
+    public ResponseDTO responseError(Integer status, String message) {
+        return new ResponseDTO(status, message, new Object());
     }
-
-    public ResponseDTO responseServerError(String message) {
-        return new ResponseDTO(500, message, new Object());
-    }
-
 }
