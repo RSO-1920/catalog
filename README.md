@@ -18,7 +18,12 @@ docker exec -it pg-catalog-api psql -h 127.0.0.1 -U postgres
 
 * [GET] files on channel:
 ```
-http://<your_ip>:8088/v1/file/channel/<channel_id>
+http://<your_ip>:8088/v1/catalog/channel/<channel_id>
+```
+
+* [GET] user files:
+```
+http://<your_ip>:8088/v1/catalog/user/<user_id>
 ```
 
 * [POST] create new file metadata

@@ -10,6 +10,10 @@ import javax.persistence.*;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "selectFilesOnChannel",
                 query = "SELECT * FROM file INNER JOIN file_on_channel ON file.file_id = file_on_channel.fk_file_id WHERE file_on_channel.channel_id = ?1",
+                resultClass = FileEntity.class),
+
+        @NamedNativeQuery(name = "selectFilesOnUser",
+                query = "SELECT * FROM file INNER JOIN file_owner ON file.file_id = file_owner.fk_file_id WHERE file_owner.user_id = ?1",
                 resultClass = FileEntity.class)
 })
 
