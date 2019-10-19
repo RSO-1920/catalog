@@ -1,0 +1,1 @@
+INSERT INTO file (file_name) VALUES ('Our first file');
