@@ -6,6 +6,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file_owner")
+
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "deleteFilesOnUser",
+                query = "DELETE FROM file_owner WHERE file_owner.fk_file_id = ?1"),
+})
+
+
 public class FileOwnerEntity implements MainEntity {
 
     @Id

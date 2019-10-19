@@ -6,6 +6,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file_on_channel")
+
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "deleteFilesOnChannel",
+                query = "DELETE FROM file_on_channel WHERE file_on_channel.fk_file_id = ?1"),
+})
+
 public class FileOnChannelEntity implements MainEntity {
 
     @Id

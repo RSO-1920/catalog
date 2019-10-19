@@ -38,4 +38,14 @@ public class CatalogFileController extends MainController {
 
         return Response.status(200).entity(this.responseOk("", newFile)).build();
     }
+
+    @DELETE
+    @Path("{fileId}")
+    public Response deleteFileMetadata(@PathParam("fileId") Integer fileId){
+
+        System.out.println("fileId: " + fileId);
+        boolean isDeleted = catalogFileBean.deleteFile(fileId);
+
+        return Response.status(200).entity(this.responseOk("delete statement success", isDeleted)).build();
+    }
 }

@@ -13,6 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 @ApplicationScoped
 public class CatalogFileBean {
@@ -49,17 +50,35 @@ public class CatalogFileBean {
         return FileConverter.toDTO(fileEntity);
     }
 
+    public boolean deleteFile(Integer fileId) {
+
+        Query query = em.createNamedQuery("deleteFilesOnUser").setParameter(1, fileId);
+        Query query1 = em.createNamedQuery("deleteFilesOnChannel").setParameter(1, fileId);
+        Query query2 = em.createNamedQuery("deleteFile").setParameter(1, fileId);
+        try {
+            beginTx();
+            query.executeUpdate();
+            query1.executeUpdate();
+            query2.executeUpdate();
+            commitTx();
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollbackTx();
+            return false;
+        }
+
+        return true;
+    }
+
     private MainEntity createNewEntity(MainEntity entity) {
         try {
             beginTx();
             em.persist(entity);
             commitTx();
         } catch (Exception e) {
-            System.out.println("Rollback transaction file on channel");
             rollbackTx();
             return null;
         }
-
         return  entity;
     }
 

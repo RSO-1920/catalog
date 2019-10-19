@@ -38,7 +38,11 @@ REQUEST BODY:
 	"userId": <user_id>,
 	"channelId": <channel_id>
 }
+```
 
+* [DELETE] file:
+```
+http://<your_ip>:8088/v1/file/<file_id>
 ```
 
 ## Docker

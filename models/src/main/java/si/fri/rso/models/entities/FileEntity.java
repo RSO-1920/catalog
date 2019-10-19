@@ -14,7 +14,10 @@ import javax.persistence.*;
 
         @NamedNativeQuery(name = "selectFilesOnUser",
                 query = "SELECT * FROM file INNER JOIN file_owner ON file.file_id = file_owner.fk_file_id WHERE file_owner.user_id = ?1",
-                resultClass = FileEntity.class)
+                resultClass = FileEntity.class),
+
+        @NamedNativeQuery(name = "deleteFile",
+                query = "DELETE FROM file WHERE file.file_id = ?1"),
 })
 
 public class FileEntity implements MainEntity {
