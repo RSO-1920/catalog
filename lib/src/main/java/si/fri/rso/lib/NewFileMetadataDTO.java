@@ -5,6 +5,7 @@ public class NewFileMetadataDTO {
     private String fileName;
     private String fileType;
     private Integer userId;
+    private Integer channelId;
 
     public String getFilePath() {
         return this.filePath;
@@ -34,4 +35,10 @@ public class NewFileMetadataDTO {
         this.userId = userId;
     }
 
+    public Integer getChannelId() {
+        return this.channelId;
+    }
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
+    }
 }

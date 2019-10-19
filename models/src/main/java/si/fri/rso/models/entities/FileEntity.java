@@ -4,6 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "file")
+
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "selectFilesOnChannel",
+                query = "SELECT * FROM file INNER JOIN file_on_channel ON file.file_id = file_on_channel.fk_file_id WHERE file_on_channel.channel_id = ?1",
+                resultClass = FileEntity.class)
+})
+
 public class FileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +34,7 @@ public class FileEntity {
     }
 
     public String getFileName() {
-        return this.getFileName();
+        return this.fileName;
     }
     public void setFileName(String fileName){
         this.fileName = fileName;
