@@ -1,6 +1,7 @@
 package si.fri.rso.api.v1.controllers;
 
 import si.fri.rso.api.v1.MainController;
+import si.fri.rso.config.CatalogConfigProperties;
 import si.fri.rso.lib.FileDTO;
 import si.fri.rso.services.beans.CatalogFileListBean;
 
@@ -20,9 +21,14 @@ public class CatalogFileChannelController extends MainController {
     @Inject
     CatalogFileListBean catalogFileListBean;
 
+    @Inject
+    CatalogConfigProperties catalogConfigProperties;
+
     @GET
     @Path("channel/{channelId}")
     public Response getChannelFilesMetadata(@PathParam("channelId") Integer channelId){
+
+        System.out.println("File downlaod url config: " + this.catalogConfigProperties.getDownloadFileApiUrl());
 
         if (channelId == null) {
             return Response.status(400).entity(this.responseError(400, "param channelId is missing")).build();
