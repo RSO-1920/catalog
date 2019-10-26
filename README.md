@@ -5,13 +5,13 @@ Files catalog for channels
 
 * run docker PostgresSQL
 ```bash
-docker run -d --name pg-catalog-api -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=image-metadata -p 5435:5432 postgres:12
+docker run -d --name rso1920-pg-catalog-api --network rso1920 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=catalog -p 5435:5432 postgres:12 
 ```
 
 * connect to PostgresSQL docker DB:
 
 ```bash
-docker exec -it pg-catalog-api psql -h 127.0.0.1 -U postgres 
+docker exec -it rso1920-pg-catalog-api psql -h 127.0.0.1 -U postgres 
 ```
 
 ## API
@@ -52,5 +52,5 @@ docker build -t rso1920/catalog:1.0.0-SNAPSHOT-19102019 .
 ```
 
 ```$xslt
-docker run -d --name rso1920-catalog-api -p 8088:8088 rso1920/catalog:1.0.0-SNAPSHOT-19102019
+docker run -d --name rso1920-catalog-api --network rso1920 -e KUMULUZEE_CONFIG_ETCD_HOSTS=http://etcd:2379 -e KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://rso1920-pg-catalog-api:5432/catalog  -p 8088:8088 rso1920/catalog:latest
 ```
