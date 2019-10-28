@@ -28,7 +28,7 @@ http://<your_ip>:8088/v1/catalog/user/<user_id>
 
 * [POST] create new file metadata
 ```
-http://<your_ip>:8088/v1/file
+http://<your_ip>:8088/v1/fileMetadata
 
 REQUEST BODY:
 {
@@ -42,7 +42,7 @@ REQUEST BODY:
 
 * [DELETE] file:
 ```
-http://<your_ip>:8088/v1/file/<file_id>
+http://<your_ip>:8088/v1/fileMetadata/<file_id>
 ```
 
 ## Docker
