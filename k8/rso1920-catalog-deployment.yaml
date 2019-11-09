@@ -26,7 +26,7 @@ spec:
               value: postgres
           ports:
             - containerPort: 8088
-              name: rso1920-catalog-server
+              name: catalog-server
               protocol: TCP
 ---
 
@@ -39,6 +39,6 @@ spec:
   ports:
     - port: 8088
       protocol: TCP
-      targetPort: rso1920-catalog-server
+      targetPort: catalog-server
   selector:
     app: rso1920-catalog
