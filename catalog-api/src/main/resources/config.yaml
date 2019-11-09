@@ -9,7 +9,7 @@ kumuluzee:
       port: 8088
   datasources:
     - jndi-name: jdbc/CatalogDS
-      connection-url: jdbc:postgresql://35.241.190.224:5432/catalog
+      connection-url: jdbc:postgresql://localhost:5435/catalog
       username: postgres
       password: postgres
       max-pool-size: 20
@@ -17,7 +17,12 @@ kumuluzee:
     start-retry-delay-ms: 500
     max-retry-delay-ms: 900000
     etcd:
-      hosts: http://35.224.77.242:2379
+      hosts: http://192.168.1.5:2379
+  discovery:
+    etcd:
+      hosts: http://192.168.1.5:2379
+    ttl: 30
+    ping-interval: 5
 
 rest-config:
   download-file-api-url: http://localhost:8090/

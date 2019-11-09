@@ -16,6 +16,8 @@ spec:
         - image: rso1920/catalog:latest
           name: rso1920-catalog
           env:
+            - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+              value: http://etcd:2379
             - name: KUMULUZEE_CONFIG_ETCD_HOSTS
               value: http://etcd:2379
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
