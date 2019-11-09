@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rso1920-catalog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rso1920-catalog
+  template:
+    metadata:
+      labels:
+        app: rso1920-catalog
+    spec:
+      containers:
+        - image: rso1920/catalog:latest
+          name: rso1920-catalog
+          env:
+            - name: KUMULUZEE_CONFIG_ETCD_HOSTS
+              value: http://etcd:2379
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://35.241.190.224:5432/catalog
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: postgres
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: postgres
+          ports:
+            - containerPort: 8088
+              name: rso1920-catalog-server
+              protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rso1920-catalog
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8088
+      protocol: TCP
+      targetPort: rso1920-catalog-server
+  selector:
+    app: rso1920-catalog
