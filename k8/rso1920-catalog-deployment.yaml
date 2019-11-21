@@ -39,7 +39,7 @@ kind: Service
 metadata:
   name: rso1920-catalog
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8088
       protocol: TCP
