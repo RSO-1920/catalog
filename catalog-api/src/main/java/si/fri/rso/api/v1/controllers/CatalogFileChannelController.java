@@ -1,5 +1,8 @@
 package si.fri.rso.api.v1.controllers;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Metered;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.api.v1.MainController;
 import si.fri.rso.config.CatalogConfigProperties;
 import si.fri.rso.lib.FileDTO;
@@ -25,6 +28,9 @@ public class CatalogFileChannelController extends MainController {
     CatalogConfigProperties catalogConfigProperties;
 
     @GET
+    @Timed(name = "catalog_channel_time_channelId")
+    @Counted(name = "catalog_channel_counted_channelId")
+    @Metered(name = "catalog_channel_metered_channelId")
     @Path("channel/{channelId}")
     public Response getChannelFilesMetadata(@PathParam("channelId") Integer channelId){
 
@@ -40,6 +46,9 @@ public class CatalogFileChannelController extends MainController {
     }
 
     @GET
+    @Timed(name = "catalog_channel_time_userId")
+    @Counted(name = "catalog_channel_counted_userId")
+    @Metered(name = "catalog_channel_metered_userId")
     @Path("user/{userId}")
     public Response getUserFilesMetadata(@PathParam("userId") Integer userId) {
         if (userId == null) {

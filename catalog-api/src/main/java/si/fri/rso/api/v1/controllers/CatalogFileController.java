@@ -1,6 +1,9 @@
 package si.fri.rso.api.v1.controllers;
 
 import com.google.gson.Gson;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Metered;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.api.v1.MainController;
 import si.fri.rso.lib.FileDTO;
 import si.fri.rso.lib.NewFileMetadataDTO;
@@ -22,6 +25,9 @@ public class CatalogFileController extends MainController {
     CatalogFileBean catalogFileBean;
 
     @POST
+    @Timed(name = "catalog_file_time_upload")
+    @Counted(name = "catalog_file_counted_upload")
+    @Metered(name = "catalog_file_metered_upload")
     public Response uploadFileMetadata(String body) {
         Gson gson = new Gson();
         NewFileMetadataDTO newFileMetadata = gson.fromJson(body, NewFileMetadataDTO.class);
@@ -40,6 +46,9 @@ public class CatalogFileController extends MainController {
     }
 
     @DELETE
+    @Timed(name = "catalog_file_time_delete")
+    @Counted(name = "catalog_file_counted_delete")
+    @Metered(name = "catalog_file_metered_delete")
     @Path("{fileId}")
     public Response deleteFileMetadata(@PathParam("fileId") Integer fileId){
 

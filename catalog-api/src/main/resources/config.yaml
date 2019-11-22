@@ -23,6 +23,19 @@ kumuluzee:
       hosts: http://localhost:2379
     ttl: 30
     ping-interval: 5
+  health:
+    checks:
+      etcd-health-check:
+        connection-url: http://localhost:2379/health
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/CatalogDS
+  metrics:
+    web-instrumentation:
+      - name: catalog-endpoint
+        url-pattern: /v1/catalog/*
+      - name: file-metadata-endpoint
+        url-pattern: /v1/fileMetadata/*
 
 rest-config:
   download-file-api-url: http://localhost:8090/

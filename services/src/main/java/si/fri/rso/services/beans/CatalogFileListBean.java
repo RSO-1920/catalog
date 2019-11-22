@@ -24,19 +24,36 @@ public class CatalogFileListBean {
     private Optional<URL> url;
 
     public List<FileDTO> getChannelFiles(Integer channelId) {
-        Query q = em.createNamedQuery("selectFilesOnChannel").setParameter(1, channelId);
-        List<FileEntity> channelFiles =  q.getResultList();
 
-        System.out.println("URL: " + url);
+        List<FileEntity> channelFiles = null;
+        
+        try {
+            Query q = em.createNamedQuery("selectFilesOnChannel").setParameter(1, channelId);
+            channelFiles = q.getResultList();
+            System.out.println("URL: " + url);
+            return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
-        return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+
+
+
     }
 
     public List<FileDTO> getUsersFiles(Integer userId) {
-        Query q = em.createNamedQuery("selectFilesOnUser").setParameter(1, userId);
-        List<FileEntity> channelFiles =  q.getResultList();
 
-        return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+        List<FileEntity> channelFiles =  null;
+        try {
+            Query q = em.createNamedQuery("selectFilesOnUser").setParameter(1, userId);
+            channelFiles = q.getResultList();
+            return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 }
