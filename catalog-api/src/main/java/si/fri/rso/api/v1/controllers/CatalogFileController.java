@@ -12,6 +12,8 @@ import si.fri.rso.services.beans.CatalogFileBean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -23,6 +25,9 @@ public class CatalogFileController extends MainController {
 
     @Inject
     CatalogFileBean catalogFileBean;
+
+    @Context
+    ContainerRequestContext reqContext;
 
     @POST
     @Timed(name = "catalog_file_time_upload")

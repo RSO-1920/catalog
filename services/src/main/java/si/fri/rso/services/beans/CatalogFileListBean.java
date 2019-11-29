@@ -19,10 +19,6 @@ public class CatalogFileListBean {
     @Inject
     private EntityManager em;
 
-    @Inject
-    @DiscoverService(value = "rso1920-catalog")
-    private Optional<URL> url;
-
     public List<FileDTO> getChannelFiles(Integer channelId) {
 
         List<FileEntity> channelFiles = null;
@@ -30,16 +26,11 @@ public class CatalogFileListBean {
         try {
             Query q = em.createNamedQuery("selectFilesOnChannel").setParameter(1, channelId);
             channelFiles = q.getResultList();
-            System.out.println("URL: " + url);
             return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-
-
-
     }
 
     public List<FileDTO> getUsersFiles(Integer userId) {
