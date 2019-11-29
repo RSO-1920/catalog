@@ -1,6 +1,7 @@
 package si.fri.rso.api.v1.controllers;
 
 import com.google.gson.Gson;
+import com.kumuluz.ee.logs.cdi.Log;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Log
 @ApplicationScoped
 @Path("/fileMetadata")
 @Produces(MediaType.APPLICATION_JSON)
