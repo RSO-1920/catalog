@@ -10,15 +10,26 @@ import si.fri.rso.models.entities.FileOwnerEntity;
 import si.fri.rso.models.interfaces.MainEntity;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-@ApplicationScoped
+@RequestScoped
 public class CatalogFileBean {
     @Inject
     private EntityManager em;
+
+    public FileDTO getFile(Integer fileId) {
+        FileEntity file = em.find(FileEntity.class, fileId);
+
+        if (file == null) {
+            return null;
+        }
+
+        return FileConverter.toDTO(file);
+    }
 
 
     public FileDTO createFileMetadata(NewFileMetadataDTO newFile) {

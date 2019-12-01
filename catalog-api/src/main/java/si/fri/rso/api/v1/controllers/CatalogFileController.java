@@ -31,6 +31,22 @@ public class CatalogFileController extends MainController {
     @Context
     ContainerRequestContext reqContext;
 
+    @GET
+    @Path("{fileId}")
+    public Response getFileMetadataBasesOnId(@PathParam("fileId") Integer fileId) {
+        if (fileId == null) {
+            return Response.status(400).entity(this.responseError(400, "fileId is missing")).build();
+        }
+
+        FileDTO file = this.catalogFileBean.getFile(fileId);
+
+        if (file == null) {
+            return Response.status(400).entity(this.responseError(400, "file not found")).build();
+        }
+
+        return Response.status(200).entity(this.responseOk("", file)).build();
+    }
+
     @POST
     @Timed(name = "catalog_file_time_upload")
     @Counted(name = "catalog_file_counted_upload")
