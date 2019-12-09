@@ -17,6 +17,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 
 @Log
 @ApplicationScoped
@@ -54,6 +55,10 @@ public class CatalogFileController extends MainController {
     public Response uploadFileMetadata(String body) {
         Gson gson = new Gson();
         NewFileMetadataDTO newFileMetadata = gson.fromJson(body, NewFileMetadataDTO.class);
+
+        if (newFileMetadata.getFileLabels() != null) {
+            System.out.println(Arrays.toString(newFileMetadata.getFileLabels().toArray()));
+        }
 
         if (newFileMetadata.getChannelId() == null || newFileMetadata.getFileName() == null ||
                 newFileMetadata.getFilePath() == null || newFileMetadata.getFileType() == null ||newFileMetadata.getUserId() == null) {

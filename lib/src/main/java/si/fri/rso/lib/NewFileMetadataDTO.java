@@ -1,11 +1,14 @@
 package si.fri.rso.lib;
 
+import java.util.ArrayList;
+
 public class NewFileMetadataDTO {
     private String filePath;
     private String fileName;
     private String fileType;
     private Integer userId;
     private Integer channelId;
+    private ArrayList<String> fileLabels;
 
     public String getFilePath() {
         return this.filePath;
@@ -40,5 +43,13 @@ public class NewFileMetadataDTO {
     }
     public void setChannelId(Integer channelId) {
         this.channelId = channelId;
+    }
+
+    public void setFileLabels(ArrayList<String> fileLabels) {
+        this.fileLabels = fileLabels;
+    }
+
+    public ArrayList<String> getFileLabels() {
+        return fileLabels;
     }
 }
