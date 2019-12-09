@@ -23,7 +23,7 @@ import java.util.List;
 @Path("/catalog")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CatalogFileChannelController extends MainController {
+public class CatalogFileSelectorController extends MainController {
 
     @Inject
     CatalogFileListBean catalogFileListBean;
@@ -64,6 +64,16 @@ public class CatalogFileChannelController extends MainController {
 
         List<FileDTO> usersFiles = catalogFileListBean.getUsersFiles(userId);
 
+        return Response.status(200).entity(this.responseOk("", usersFiles)).build();
+    }
+
+    @GET
+    @Path("keywords")
+    public Response getFilesBaseOnKeywords(@QueryParam("key") String keywords) {
+        if (keywords == null) {
+            return Response.status(400).entity(this.responseError(400, "query params missing")).build();
+        }
+        List<FileDTO> usersFiles = catalogFileListBean.getFilesWithKeywords(keywords);
         return Response.status(200).entity(this.responseOk("", usersFiles)).build();
     }
 }

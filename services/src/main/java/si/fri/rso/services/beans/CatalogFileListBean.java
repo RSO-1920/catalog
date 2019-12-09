@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +20,32 @@ import java.util.stream.Collectors;
 public class CatalogFileListBean {
     @Inject
     private EntityManager em;
+
+    public List<FileDTO> getFilesWithKeywords (String keyWords) {
+        List<FileEntity> files = new ArrayList<FileEntity>();
+
+        String[] keywords = keyWords.trim().split(",");
+        // System.out.println(Arrays.toString(keywords));
+        for (String key : keywords) {
+            // System.out.print(key + " ");
+            try {
+                Query q = em.createNamedQuery("selectFilesWithKeywords").setParameter(1, "%" + key + "%");
+                List<FileEntity> filesTmp = q.getResultList();
+
+                for (FileEntity entity : filesTmp) {
+                    if (!files.contains(entity)) {
+                        files.add(entity);
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return (List<FileDTO>) files.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+    }
 
     public List<FileDTO> getChannelFiles(Integer channelId) {
 

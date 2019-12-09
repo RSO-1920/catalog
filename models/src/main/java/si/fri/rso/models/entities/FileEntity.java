@@ -16,6 +16,10 @@ import javax.persistence.*;
                 query = "SELECT * FROM file INNER JOIN file_owner ON file.file_id = file_owner.fk_file_id WHERE file_owner.user_id = ?1",
                 resultClass = FileEntity.class),
 
+        @NamedNativeQuery(name = "selectFilesWithKeywords",
+                query = "SELECT * FROM file INNER JOIN file_keywords ON file.file_id = file_keywords.fk_file_id WHERE file_keywords.keyword LIKE ?1",
+                resultClass = FileEntity.class),
+
         @NamedNativeQuery(name = "deleteFile",
                 query = "DELETE FROM file WHERE file.file_id = ?1"),
 })
@@ -59,5 +63,4 @@ public class FileEntity implements MainEntity {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
-
 }

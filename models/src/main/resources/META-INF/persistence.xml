@@ -7,6 +7,7 @@
         <class>si.fri.rso.models.entities.FileEntity</class>
         <class>si.fri.rso.models.entities.FileOnChannelEntity</class>
         <class>si.fri.rso.models.entities.FileOwnerEntity</class>
+        <class>si.fri.rso.models.entities.FileKeywordsEntity</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

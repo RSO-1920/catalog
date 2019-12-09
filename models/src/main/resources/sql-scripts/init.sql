@@ -11,3 +11,7 @@ INSERT INTO file_on_channel (channel_id, fk_file_id) VALUES (2, 3);
 INSERT INTO file_owner (user_id, fk_file_id) VALUES (1, 1);
 INSERT INTO file_owner (user_id, fk_file_id) VALUES (1, 2);
 INSERT INTO file_owner (user_id, fk_file_id) VALUES (2, 3);
+
+INSERT INTO file_keywords (fk_file_id, keyword) VALUES (2, 'keyword1');
+INSERT INTO file_keywords (fk_file_id, keyword) VALUES (2, 'keyword2');
+INSERT INTO file_keywords (fk_file_id, keyword) VALUES (2, 'keyword3');
