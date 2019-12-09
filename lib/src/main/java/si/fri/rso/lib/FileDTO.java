@@ -1,10 +1,13 @@
 package si.fri.rso.lib;
 
+import java.util.List;
+
 public class FileDTO {
     private Integer fileId;
     private String fileName;
     private String filePath;
     private String fileType;
+    private List<String> keywords;
 
     public Integer getFileId() {
         return this.fileId;
@@ -32,5 +35,13 @@ public class FileDTO {
     }
     public void setFileType(String fileType) {
         this.fileType = fileType;
+    }
+
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
     }
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "file_keywords")
 
 @NamedNativeQueries({
+        @NamedNativeQuery(name = "findkeywords", query = "SELECT * FROM file_keywords WHERE file_keywords.fk_file_id = ?1", resultClass = FileKeywordsEntity.class),
 })
 
 public class FileKeywordsEntity implements MainEntity {

@@ -16,12 +16,16 @@ import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
 public class CatalogFileBean {
     @Inject
     private EntityManager em;
+
+    @Inject
+    private FileConverter fileConverter;
 
     public FileDTO getFile(Integer fileId) {
         FileEntity file = em.find(FileEntity.class, fileId);
@@ -30,7 +34,7 @@ public class CatalogFileBean {
             return null;
         }
 
-        return FileConverter.toDTO(file);
+        return this.fileConverter.toDTO(file);
     }
 
 
@@ -65,14 +69,14 @@ public class CatalogFileBean {
             System.out.println("keywords creating");
             List<FileKeywordsEntity> fileKeywordsEntityList = NewFileConverter.toFileKeywordEntity(newFile, fileEntity);
             for (FileKeywordsEntity fileKeywordsEntity: fileKeywordsEntityList) {
-                System.out.println("KEYWORD: " + fileKeywordsEntity.getKeyword());
+                // System.out.println("KEYWORD: " + fileKeywordsEntity.getKeyword());
                 fileKeywordsEntity = (FileKeywordsEntity) this.createNewEntity(fileKeywordsEntity);
                 assert fileKeywordsEntity != null;
-                System.out.println("KEYWORD: " + fileKeywordsEntity.getId());
+                // System.out.println("KEYWORD: " + fileKeywordsEntity.getId());
             }
         }
 
-        return FileConverter.toDTO(fileEntity);
+        return this.fileConverter.toDTO(fileEntity);
     }
 
     public boolean deleteFile(Integer fileId) {

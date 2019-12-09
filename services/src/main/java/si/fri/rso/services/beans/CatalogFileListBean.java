@@ -21,6 +21,9 @@ public class CatalogFileListBean {
     @Inject
     private EntityManager em;
 
+    @Inject
+    FileConverter fileConverter;
+
     public List<FileDTO> getFilesWithKeywords (String keyWords) {
         List<FileEntity> files = new ArrayList<FileEntity>();
 
@@ -43,8 +46,13 @@ public class CatalogFileListBean {
                 return null;
             }
         }
+        List<FileDTO> fileDTO = new ArrayList<FileDTO>();
+        for (FileEntity fileEntity : files) {
+            fileDTO.add(fileConverter.toDTO(fileEntity));
+        }
 
-        return (List<FileDTO>) files.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+
+        return fileDTO;
     }
 
     public List<FileDTO> getChannelFiles(Integer channelId) {
@@ -54,7 +62,11 @@ public class CatalogFileListBean {
         try {
             Query q = em.createNamedQuery("selectFilesOnChannel").setParameter(1, channelId);
             channelFiles = q.getResultList();
-            return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+            List<FileDTO> fileDTO = new ArrayList<FileDTO>();
+            for (FileEntity fileEntity : channelFiles) {
+                fileDTO.add(fileConverter.toDTO(fileEntity));
+            }
+            return fileDTO;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -67,7 +79,11 @@ public class CatalogFileListBean {
         try {
             Query q = em.createNamedQuery("selectFilesOnUser").setParameter(1, userId);
             channelFiles = q.getResultList();
-            return (List<FileDTO>) channelFiles.stream().map(FileConverter::toDTO).collect(Collectors.toList());
+            List<FileDTO> fileDTO = new ArrayList<FileDTO>();
+            for (FileEntity fileEntity : channelFiles) {
+                fileDTO.add(fileConverter.toDTO(fileEntity));
+            }
+            return fileDTO;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
