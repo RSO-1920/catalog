@@ -2,12 +2,17 @@ package si.fri.rso.api.v1.controllers;
 
 import com.google.gson.Gson;
 import com.kumuluz.ee.logs.cdi.Log;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.api.v1.MainController;
 import si.fri.rso.lib.FileDTO;
 import si.fri.rso.lib.NewFileMetadataDTO;
+import si.fri.rso.lib.responses.ResponseDTO;
 import si.fri.rso.services.beans.CatalogFileBean;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -33,6 +38,16 @@ public class CatalogFileController extends MainController {
     ContainerRequestContext reqContext;
 
     @GET
+    @Operation(description = "Get file metadata based on id", summary = "filemetadata id", tags = "file", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "get file success",
+                    content = @Content(schema = @Schema(implementation = FileDTO.class))
+            ),
+            @ApiResponse(responseCode = "400",
+                    description = "error",
+                    content = @Content(schema = @Schema(implementation = ResponseDTO.class))
+            ),
+    })
     @Path("{fileId}")
     public Response getFileMetadataBasesOnId(@PathParam("fileId") Integer fileId) {
         if (fileId == null) {
@@ -49,6 +64,20 @@ public class CatalogFileController extends MainController {
     }
 
     @POST
+    @Operation(description = "Save new file metadata", summary = "file metadata", tags = "file, metadata", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "upload file success",
+                    content = @Content(schema = @Schema(implementation = FileDTO.class))
+            ),
+            @ApiResponse(responseCode = "400",
+                    description = "missing params",
+                    content = @Content(schema = @Schema(implementation = ResponseDTO.class))
+            ),
+            @ApiResponse(responseCode = "500",
+                    description = "error saving metadata",
+                    content = @Content(schema = @Schema(implementation = ResponseDTO.class))
+            ),
+    })
     @Timed(name = "catalog_file_time_upload")
     @Counted(name = "catalog_file_counted_upload")
     @Metered(name = "catalog_file_metered_upload")
@@ -74,6 +103,12 @@ public class CatalogFileController extends MainController {
     }
 
     @DELETE
+    @Operation(description = "Delete file metadata", summary = "delete file metadata", tags = "file, delete", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "delete file metadata succes",
+                    content = @Content(schema = @Schema(implementation = Boolean.class))
+            ),
+    })
     @Timed(name = "catalog_file_time_delete")
     @Counted(name = "catalog_file_counted_delete")
     @Metered(name = "catalog_file_metered_delete")

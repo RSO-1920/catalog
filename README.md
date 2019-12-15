@@ -54,3 +54,12 @@ docker build -t rso1920/catalog:1.0.0-SNAPSHOT-19102019 .
 ```$xslt
 docker run -d --name rso1920-catalog-api --network rso1920 -e KUMULUZEE_CONFIG_ETCD_HOSTS=http://etcd:2379 -e KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://rso1920-pg-catalog-api:5432/catalog  -p 8088:8088 rso1920/catalog:latest
 ```
+
+## OpenAPI
+```
+http://localhost:8088/api-specs/v1/openapi.json
+```
+
+```
+http://localhost:8088/api-specs/ui/
+```
