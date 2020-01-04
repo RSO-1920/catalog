@@ -24,7 +24,7 @@ public class FileOwnerEntity implements MainEntity {
     private FileEntity fileEntity;
 
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
 
     public Integer getId() {
         return this.id;
@@ -37,10 +37,10 @@ public class FileOwnerEntity implements MainEntity {
         this.fileEntity = fileEntity;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return this.userId;
     }
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
