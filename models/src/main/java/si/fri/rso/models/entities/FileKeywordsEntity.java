@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "findkeywords", query = "SELECT * FROM file_keywords WHERE file_keywords.fk_file_id = ?1", resultClass = FileKeywordsEntity.class),
         @NamedNativeQuery(name = "deleteFileKeywords",
-                query = "DELETE FROM file_keywords WHERE WHERE file_keywords.fk_file_id = ?1"),
+                query = "DELETE FROM file_keywords WHERE file_keywords.fk_file_id = ?1"),
 })
 
 public class FileKeywordsEntity implements MainEntity {
