@@ -80,12 +80,13 @@ public class CatalogFileBean {
     }
 
     public boolean deleteFile(Integer fileId) {
-
+        Query queryKeywords = em.createNamedQuery("deleteFileKeywords").setParameter(1, fileId);
         Query query = em.createNamedQuery("deleteFilesOnUser").setParameter(1, fileId);
         Query query1 = em.createNamedQuery("deleteFilesOnChannel").setParameter(1, fileId);
         Query query2 = em.createNamedQuery("deleteFile").setParameter(1, fileId);
         try {
             beginTx();
+            queryKeywords.executeUpdate();
             query.executeUpdate();
             query1.executeUpdate();
             query2.executeUpdate();
